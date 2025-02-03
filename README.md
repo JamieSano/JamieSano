@@ -15,10 +15,10 @@
 ---
 
 ## 🐻‍❄️ 𝒜𝒷𝑜𝓊𝓉 𝑀𝑒  
-  [🎀 𝒩𝒶𝓂𝑒: Jamie Jasmine Saño]
-  [🐾 𝒫𝒶𝓈𝓈𝒾𝑜𝓃𝓈: Data Analytics, UI/UX, Creative Coding]
-  [🌈 𝒜𝓈𝓅𝒾𝓇𝒾𝓃𝑔: Data Scientist | Developer Advocate]
-  [🍓 𝒽𝑜𝒷𝒷𝒾𝑒𝓈: Coding, Art(e), Watching Kdrama, Playing Guitar]
+  🎀 𝒩𝒶𝓂𝑒: Jamie Jasmine Saño<br>
+  🐾 𝒫𝒶𝓈𝓈𝒾𝑜𝓃𝓈: Data Analytics, UI/UX, Creative Coding<br>
+  🌈 𝒜𝓈𝓅𝒾𝓇𝒾𝓃𝑔: Data Scientist | Developer Advocate<br>
+  🍓 𝒽𝑜𝒷𝒷𝒾𝑒𝓈: Coding, Art(e), Watching Kdrama, Playing Guitar<br>
 
 ## 🎨 **𝒞𝓊𝓉𝑒 𝒞𝑜𝒹𝒾𝓃𝑔 𝒯𝑜𝑜𝓁𝓈 & 𝒯𝑒𝒸𝒽 𝒮𝓉𝒶𝒸𝓀**
 <p align="center">
