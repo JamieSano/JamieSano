@@ -4,7 +4,7 @@
 <div align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2UxcDhsYW9pNmg5dTV4cXYxcm9rN2hyZmxmbWV2dmw5dmE4OWxlayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qLzzBMYl9pFMi/giphy.gif" width="200"/>
   
-  # 🌸 𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 𝓂𝓎 𝒞𝓊𝓉𝑒 𝒞𝑜𝓇𝓃𝑒𝓇! 🌸  
+  # 🌸 𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 Jamie 𝒞𝑜𝓇𝓃𝑒𝓇! 🌸  
   🎀 *Tech enthusiast | Data Wizard | Creative Spirit* 🎀  
 
   💡 Exploring **Power BI**, **Python**, and **Machine Learning**!  
@@ -15,10 +15,10 @@
 ---
 
 ## 🐻‍❄️ 𝒜𝒷𝑜𝓊𝓉 𝑀𝑒  
-  🎀 𝒩𝒶𝓂𝑒: Jamie Jasmine Saño
-  🐾 𝒫𝒶𝓈𝓈𝒾𝑜𝓃𝓈: Data Analytics, UI/UX, Creative Coding
-  🌈 𝒜𝓈𝓅𝒾𝓇𝒾𝓃𝑔: Data Scientist | Developer Advocate
-  🍓 𝒽𝑜𝒷𝒷𝒾𝑒𝓈: Coding, Art(e), Watching Kdrama, Playing Guitar
+  [🎀 𝒩𝒶𝓂𝑒: Jamie Jasmine Saño]
+  [🐾 𝒫𝒶𝓈𝓈𝒾𝑜𝓃𝓈: Data Analytics, UI/UX, Creative Coding]
+  [🌈 𝒜𝓈𝓅𝒾𝓇𝒾𝓃𝑔: Data Scientist | Developer Advocate]
+  [🍓 𝒽𝑜𝒷𝒷𝒾𝑒𝓈: Coding, Art(e), Watching Kdrama, Playing Guitar]
 
 ## 🎨 **𝒞𝓊𝓉𝑒 𝒞𝑜𝒹𝒾𝓃𝑔 𝒯𝑜𝑜𝓁𝓈 & 𝒯𝑒𝒸𝒽 𝒮𝓉𝒶𝒸𝓀**
 <p align="center">
