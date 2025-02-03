@@ -37,13 +37,13 @@
 
 ## 🧸 **𝒞𝑜𝓃𝓃𝑒𝒸𝓉 𝒲𝒾𝓉𝒽 𝑀𝑒!**
 <p align="center">
-  <a href="your-linkedin-url">
+  <a href="https://www.linkedin.com/in/jamiesano-/">
     <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin"/>
   </a>
   <a href="your-portfolio-url">
     <img src="https://img.shields.io/badge/Portfolio-Website-orange?style=for-the-badge&logo=github"/>
   </a>
-  <a href="your-email">
+  <a href="sano.jamiejasmined@gmail.com">
     <img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail"/>
   </a>
 </p>
