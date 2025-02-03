@@ -1,4 +1,4 @@
-# 👋 Hi, I'm [Your Name]!
+# 👋 Hi, I'm Jamie Jasmine Saño!
 🚀 Passionate about Data Analytics, Machine Learning, and Software Development.
 
 🔹 **Currently:** Chief Relations Officer at GDG on Campus - TUPM  
