@@ -1,6 +1,5 @@
 <!-- Cute Header -->
 <div align="center">
-  <img src="https://i.gifer.com/fetch/w300-preview/ed/eddca775bac1d75fd48c4de139f165c7.gif" width="500"/>
   
   # 🌸 𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 Jamie 𝒞𝑜𝓇𝓃𝑒𝓇! 🌸  
   🎀 *Tech enthusiast | Data Wizard | Creative Spirit* 🎀  
