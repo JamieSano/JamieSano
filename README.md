@@ -2,7 +2,7 @@
 🚀 Passionate about Data Analytics, Machine Learning, and Software Development.
 <!-- Cute Header -->
 <div align="center">
-  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fvsgif.com%2Fgif%2F344558&psig=AOvVaw0Z6fxNkATI1m25W0MPHcGx&ust=1738669637030000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCIiz853Fp4sDFQAAAAAdAAAAABAb" width="200"/>
+  <img src="https://i.gifer.com/embedded/download/3pjT.gif" width="200"/>
   
   # 🌸 𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 Jamie 𝒞𝑜𝓇𝓃𝑒𝓇! 🌸  
   🎀 *Tech enthusiast | Data Wizard | Creative Spirit* 🎀  
