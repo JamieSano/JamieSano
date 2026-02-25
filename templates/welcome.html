@@ -7,6 +7,19 @@
     Discover which role fits your strengths best through 35 quick Likert-style questions
     (1 = Strongly Disagree, 5 = Strongly Agree).
   </p>
-  <a class="btn" href="{{ url_for('start') }}">Start Your Quest</a>
+  <p class="muted">
+    Question source:
+    {% if profile_source == 'pdf-copilot' %}
+      PDF-based dynamic generation (Copilot/API or local fallback).
+    {% else %}
+      Static text profile files.
+    {% endif %}
+  </p>
+  <div class="hero-actions">
+    <a class="btn" href="{{ url_for('start') }}">Start Your Quest</a>
+    <form method="post" action="{{ url_for('reload_profiles') }}">
+      <button class="btn secondary" type="submit">Reload Question Bank</button>
+    </form>
+  </div>
 </section>
 {% endblock %}

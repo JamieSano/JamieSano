@@ -145,3 +145,18 @@ input[type="text"] {
   padding: 0.6rem 0.8rem;
   margin-bottom: 0.45rem;
 }
+
+
+.hero-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid #6b7aa8;
+  color: #d4dcf7;
+}
