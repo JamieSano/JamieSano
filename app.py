@@ -427,7 +427,20 @@ RAG_KNOWLEDGE = RAGIndex.from_documents(build_rag_documents(PROFILES, PROFILE_SO
 
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "replace-this-with-a-secure-secret")
+
+
+def load_flask_secret_key() -> str:
+    secret_key = os.getenv("FLASK_SECRET_KEY")
+    if not secret_key:
+        raise RuntimeError(
+            "FLASK_SECRET_KEY must be set to a strong random value before starting the app."
+        )
+    if len(secret_key) < 32:
+        raise RuntimeError("FLASK_SECRET_KEY must be at least 32 characters long.")
+    return secret_key
+
+
+app.secret_key = load_flask_secret_key()
 
 
 def get_question_sequence() -> list[dict[str, str | int]]:

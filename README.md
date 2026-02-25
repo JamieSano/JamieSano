@@ -48,6 +48,25 @@ python app.py
 
 Open: `http://127.0.0.1:5000`
 
+
+## Deploy with GitHub (recommended)
+This app is Flask-based, so **GitHub Pages is not suitable**. The simplest GitHub-driven deployment is:
+
+1. Push this repo to GitHub.
+2. Create a new web service in [Render](https://render.com/) and choose **Build and deploy from a Git repository**.
+3. Select this repository.
+4. Render will auto-detect `render.yaml` in this repo and use:
+   - build: `pip install -r requirements.txt`
+   - start: `gunicorn --bind 0.0.0.0:$PORT wsgi:app`
+5. In Render environment variables, ensure `FLASK_SECRET_KEY` is present (Render can auto-generate from `render.yaml`).
+
+After deploy, open the Render URL to run the assessment publicly.
+
+## Streamlit deployment note
+If you specifically need Streamlit Community Cloud, the app would need to be rewritten as a Streamlit UI (`streamlit_app.py`) because the current implementation is Flask + Jinja templates.
+
+For now, use the GitHub + Render path above for production deployment with minimal changes.
+
 ## Optional environment variables
 - `FLASK_SECRET_KEY`: secure session secret
 - `GITHUB_TOKEN` or `GH_TOKEN`: enables Copilot/API-powered generation
