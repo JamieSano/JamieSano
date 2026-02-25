@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="card">
+<section class="card neon-card">
   <p class="badge">Question {{ index + 1 }} of {{ total }}</p>
   <div class="progress-wrap" aria-label="Progress">
     <div class="progress" style="width: {{ progress }}%;"></div>
   </div>
 
   <h2>{{ question.statement }}</h2>
-  <p class="muted">This statement helps measure your fit for career skills.</p>
+  <p class="muted">Choose your power level for this statement.</p>
 
   <form method="post" class="likert-form">
     <div class="likert-scale">
       {% for value in likert_values %}
-      <label>
+      <label data-sound="select">
         <input type="radio" name="score" value="{{ value }}" required />
         <span>{{ value }}</span>
       </label>
@@ -22,7 +22,7 @@
       <span>1 = Strongly Disagree</span>
       <span>5 = Strongly Agree</span>
     </div>
-    <button class="btn" type="submit">Next</button>
+    <button class="btn" data-sound="next" type="submit">Next Mission</button>
   </form>
 </section>
 {% endblock %}

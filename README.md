@@ -11,6 +11,12 @@ A game-like HR assessment tool that maps candidates to role fit using Likert-sca
    - short job description
    - fun fact about OpenText role
    - role compatibility score breakdown
+5. Leaderboard page with Name, Course, Role Fit, and score percentage
+
+## Game-like features
+- Neon card styling and arcade-like button interactions
+- Sound effects for starting, selecting Likert answers, and moving to next question
+- Persistent leaderboard (`leaderboard.json`) that records top role-match results
 
 ## Dynamic question generation from PDFs (Copilot-ready)
 The app supports **PDF role materials** in `job_profiles_pdf/`.

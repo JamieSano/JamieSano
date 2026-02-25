@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="card">
-  <h2>Player Setup</h2>
+<section class="card neon-card">
+  <h2>🧑‍🚀 Player Setup</h2>
   <p>Before the challenge starts, enter your details.</p>
   {% if error %}
     <p class="error">{{ error }}</p>
@@ -15,7 +15,7 @@
       College Course
       <input type="text" name="course" required value="{{ course or '' }}" />
     </label>
-    <button class="btn" type="submit">Begin Assessment</button>
+    <button class="btn" data-sound="start" type="submit">Begin Assessment</button>
   </form>
 </section>
 {% endblock %}

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="card hero">
+<section class="card hero neon-card">
   <p class="badge">🏆 Final Result</p>
   <h1>WOW! {{ name }}, you are fit to be a {{ role.role }}.</h1>
   <p><strong>Course:</strong> {{ course }}</p>
+  <p class="highlight">Role Match Score: {{ best_score }}/{{ best_score_max }} ({{ best_percent }}%)</p>
   <p>{{ role.description }}</p>
 
   <h3>Fun fact about this OpenText role</h3>
@@ -16,6 +17,9 @@
     {% endfor %}
   </ul>
 
-  <a class="btn" href="{{ url_for('welcome') }}">Play Again</a>
+  <div class="hero-actions">
+    <a class="btn" data-sound="start" href="{{ url_for('welcome') }}">Play Again</a>
+    <a class="btn secondary" href="{{ url_for('leaderboard') }}">Open Leaderboard</a>
+  </div>
 </section>
 {% endblock %}
