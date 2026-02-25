@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card hero neon-card">
+  <p class="badge">🎮 Game-like Talent Assessment</p>
+  <h1>Welcome to OpenText Role Quest</h1>
+  <p>
+    Discover which role fits your strengths best through 35 quick Likert-style questions
+    (1 = Strongly Disagree, 5 = Strongly Agree).
+  </p>
+  <p class="muted">
+    Question source:
+    {% if profile_source == 'pdf-copilot' %}
+      PDF-based dynamic generation (Copilot/API or local fallback).
+    {% else %}
+      Static text profile files.
+    {% endif %}
+  </p>
+  <div class="hero-actions">
+    <a class="btn" data-sound="start" href="{{ url_for('start') }}">Start Your Quest</a>
+    <a class="btn secondary" href="{{ url_for('leaderboard') }}">View Leaderboard</a>
+    <form method="post" action="{{ url_for('reload_profiles') }}">
+      <button class="btn secondary" data-sound="click" type="submit">Reload Question Bank</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+  <h3>🏅 Top 5 Role Champions</h3>
+  {% if leaderboard %}
+  <ul class="score-list">
+    {% for row in leaderboard %}
+      <li>
+        <span>#{{ row.rank }} {{ row.name }} → {{ row.role }}</span>
+        <strong>{{ row.score }}/{{ row.score_max }} ({{ row.percent }}%)</strong>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="muted">No entries yet. Be the first to complete the quest!</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenText Role Quest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <section class="chatbot-shell" id="chatbotShell">
+      <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chatbot">
+        <img src="{{ url_for('static', filename='mascot.svg') }}" alt="Mascot chatbot" />
+        <span class="chatbot-wave">Hi! Talk with me.</span>
+      </button>
+      <div class="chatbot-panel" id="chatbotPanel" hidden>
+        <div class="chatbot-header">
+          <strong>OpenText Buddy</strong>
+          <small>RAG chatbot for roles & OpenText Philippines</small>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="bot-msg">Hi! I can answer using your uploaded role PDFs.</div>
+        </div>
+        <form id="chatbotForm" class="chatbot-form">
+          <input id="chatbotInput" type="text" placeholder="Ask about roles or OpenText PH..." maxlength="300" required />
+          <button id="chatbotMic" type="button" class="chatbot-icon-btn" title="Voice input">🎤</button>
+          <button class="btn" type="submit">Send</button>
+        </form>
+        <label class="voice-toggle-row">
+          <input id="chatbotVoiceToggle" type="checkbox" checked />
+          <span>🔊 Voice Assistant reply</span>
+        </label>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+    <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
+  </body>
+</html>

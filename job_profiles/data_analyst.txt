@@ -1,0 +1,11 @@
+Role: Data Analyst
+Description: Data Analysts transform raw data into clear insights, dashboards, and recommendations that guide business decisions.
+Fun Fact: OpenText teams use analytics to improve customer experiences by spotting trends hidden in huge enterprise datasets.
+LikertStatements:
+- I enjoy finding patterns in numbers and charts.
+- I like turning messy data into organized reports.
+- I feel confident explaining insights using visualizations.
+- I am curious about why business metrics move up or down.
+- I enjoy comparing options using evidence and data.
+- I can stay patient when cleaning large datasets.
+- I like creating dashboards that help people decide quickly.

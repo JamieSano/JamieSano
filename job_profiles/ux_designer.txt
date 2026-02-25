@@ -1,0 +1,11 @@
+Role: UX Designer
+Description: UX Designers create intuitive product experiences by understanding user needs and translating them into designs.
+Fun Fact: OpenText product teams combine design thinking and research to simplify complex enterprise workflows.
+LikertStatements:
+- I enjoy understanding how people feel when using products.
+- I like sketching ideas and improving them through feedback.
+- I care about making interfaces simple and accessible.
+- I enjoy interviewing users to learn their needs.
+- I like organizing information so users can find things easily.
+- I enjoy collaborating with engineers and product teams.
+- I pay attention to details in layouts and interactions.

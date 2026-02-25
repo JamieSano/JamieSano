@@ -1,0 +1,11 @@
+Role: Product Manager
+Description: Product Managers align business goals, user needs, and technical possibilities to deliver valuable products.
+Fun Fact: OpenText product managers often coordinate across global teams to deliver enterprise features at scale.
+LikertStatements:
+- I enjoy turning big ideas into clear plans.
+- I like prioritizing tasks based on impact.
+- I feel confident communicating with different teams.
+- I am interested in both customer needs and business goals.
+- I enjoy making decisions with incomplete information.
+- I like tracking progress and adjusting plans when needed.
+- I enjoy writing clear requirements for project execution.

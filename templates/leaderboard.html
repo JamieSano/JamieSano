@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card neon-card">
+  <p class="badge">🏅 Hall of Talent</p>
+  <h1>Leaderboard</h1>
+  <p class="muted">Top candidates based on their best role-fit score.</p>
+
+  {% if entries %}
+  <table class="leaderboard-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Role Fit</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in entries %}
+      <tr>
+        <td>#{{ row.rank }}</td>
+        <td>{{ row.name }}</td>
+        <td>{{ row.course }}</td>
+        <td>{{ row.role }}</td>
+        <td>{{ row.score }}/{{ row.score_max }} ({{ row.percent }}%)</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No leaderboard entries yet.</p>
+  {% endif %}
+
+  <div class="hero-actions">
+    <a class="btn" href="{{ url_for('welcome') }}">Back Home</a>
+  </div>
+</section>
+{% endblock %}
