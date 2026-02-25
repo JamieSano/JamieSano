@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import random
 import re
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -23,6 +25,8 @@ ROLE_COUNT = 7
 QUESTIONS_PER_ROLE = 5
 MIN_STATEMENTS_PER_ROLE = 7
 LEADERBOARD_LIMIT = 50
+CHUNK_SIZE = 700
+CHUNK_OVERLAP = 120
 
 
 @dataclass
@@ -32,6 +36,65 @@ class JobProfile:
     description: str
     fun_fact: str
     statements: list[str]
+
+
+@dataclass
+class RAGChunk:
+    source: str
+    text: str
+    tokens: Counter[str]
+
+
+class RAGIndex:
+    def __init__(self, chunks: list[RAGChunk]) -> None:
+        self.chunks = chunks
+        self.doc_count = len(chunks)
+        self.df: Counter[str] = Counter()
+        for chunk in chunks:
+            self.df.update(set(chunk.tokens.keys()))
+
+    @staticmethod
+    def tokenize(text: str) -> list[str]:
+        return re.findall(r"[a-zA-Z][a-zA-Z0-9-]{1,}", text.lower())
+
+    @classmethod
+    def from_documents(cls, docs: list[tuple[str, str]]) -> "RAGIndex":
+        chunks: list[RAGChunk] = []
+        for source, text in docs:
+            for chunk_text in chunk_text_with_overlap(text):
+                tokens = Counter(cls.tokenize(chunk_text))
+                if tokens:
+                    chunks.append(RAGChunk(source=source, text=chunk_text, tokens=tokens))
+        return cls(chunks)
+
+    def retrieve(self, query: str, top_k: int = 4) -> list[RAGChunk]:
+        query_tokens = Counter(self.tokenize(query))
+        if not query_tokens or not self.chunks:
+            return []
+
+        scored: list[tuple[float, RAGChunk]] = []
+        for chunk in self.chunks:
+            score = self._score(query_tokens, chunk)
+            if score > 0:
+                scored.append((score, chunk))
+
+        scored.sort(key=lambda item: item[0], reverse=True)
+        return [chunk for _, chunk in scored[:top_k]]
+
+    def _score(self, query_tokens: Counter[str], chunk: RAGChunk) -> float:
+        score = 0.0
+        norm_query = math.sqrt(sum(value * value for value in query_tokens.values())) or 1.0
+        norm_chunk = math.sqrt(sum(value * value for value in chunk.tokens.values())) or 1.0
+
+        for token, q_tf in query_tokens.items():
+            c_tf = chunk.tokens.get(token, 0)
+            if not c_tf:
+                continue
+            df = self.df.get(token, 1)
+            idf = math.log((self.doc_count + 1) / df)
+            score += (q_tf * c_tf) * (1 + idf)
+
+        return score / (norm_query * norm_chunk)
 
 
 class CopilotQuestionGenerator:
@@ -200,6 +263,41 @@ def validate_profiles(profiles: list[JobProfile]) -> None:
             raise ValueError(f"{profile.key} must contain at least {MIN_STATEMENTS_PER_ROLE} statements.")
 
 
+def chunk_text_with_overlap(text: str) -> list[str]:
+    clean = " ".join(text.split())
+    if not clean:
+        return []
+    chunks: list[str] = []
+    start = 0
+    while start < len(clean):
+        end = start + CHUNK_SIZE
+        chunks.append(clean[start:end])
+        if end >= len(clean):
+            break
+        start = max(0, end - CHUNK_OVERLAP)
+    return chunks
+
+
+def build_rag_documents(profiles: list[JobProfile], profile_source: str) -> list[tuple[str, str]]:
+    docs: list[tuple[str, str]] = []
+    if profile_source == "pdf-copilot" and PDF_PROFILE_DIR.exists():
+        for path in sorted(PDF_PROFILE_DIR.glob("*.pdf")):
+            docs.append((path.name, read_pdf_text(path)))
+    if not docs:
+        for profile in profiles:
+            role_text = "\n".join(
+                [
+                    f"Role: {profile.role}",
+                    f"Description: {profile.description}",
+                    f"Fun Fact: {profile.fun_fact}",
+                    "Statements:",
+                    *profile.statements,
+                ]
+            )
+            docs.append((f"{profile.role}.txt", role_text))
+    return docs
+
+
 def load_leaderboard() -> list[dict[str, str | int]]:
     if not LEADERBOARD_FILE.exists():
         return []
@@ -251,51 +349,46 @@ def format_leaderboard_entries(entries: list[dict[str, str | int]], limit: int =
     return formatted
 
 
-
-
-def build_role_knowledge() -> str:
-    lines: list[str] = []
-    for profile in PROFILES:
-        lines.append(f"Role: {profile.role}")
-        lines.append(f"Description: {profile.description}")
-        lines.append(f"Fun Fact: {profile.fun_fact}")
-        lines.append("-")
-    return "\n".join(lines)
-
-
-def local_chatbot_answer(question: str) -> str:
+def local_chatbot_answer(question: str, retrieved_chunks: list[RAGChunk]) -> str:
     q = question.lower()
 
     for profile in PROFILES:
         role_name = profile.role.lower()
-        if role_name in q or profile.key.replace('_', ' ') in q:
+        if role_name in q or profile.key.replace("_", " ") in q:
             return (
-                f"Great question! For {profile.role}, here is a quick overview: "
-                f"{profile.description} Fun fact: {profile.fun_fact}"
+                f"For {profile.role}: {profile.description} "
+                f"Fun fact: {profile.fun_fact}"
             )
 
     if "opentext" in q and ("philippines" in q or "ph" in q):
+        if retrieved_chunks:
+            snippet = retrieved_chunks[0].text[:260]
+            return (
+                "Based on the available role materials, here is related context: "
+                f"{snippet}... For official OpenText Philippines details, please check OpenText's official site."
+            )
         return (
-            "OpenText in the Philippines is part of OpenText's global organization and supports enterprise "
-            "customers through technology, operations, and talent development. For official office and hiring "
-            "details, please check OpenText's official careers and company pages."
+            "OpenText Philippines is part of OpenText's global organization. "
+            "For official office and hiring details, please refer to OpenText's official pages."
         )
 
-    if "role" in q or "fit" in q or "job" in q:
-        role_names = ", ".join([profile.role for profile in PROFILES])
-        return f"The assessment currently maps candidates to these roles: {role_names}."
+    if retrieved_chunks:
+        return f"I found this in your uploaded materials: {retrieved_chunks[0].text[:320]}..."
 
     return (
-        "I can help with role descriptions, role-fit tips, and general OpenText Philippines questions. "
-        "Try asking: 'What does a Cloud Engineer do?' or 'Tell me about OpenText Philippines.'"
+        "I can answer questions using your role PDF materials. Try asking about a specific role, "
+        "skills, job fit, or OpenText Philippines."
     )
 
 
-def generate_chatbot_reply(question: str) -> tuple[str, str]:
+def generate_chatbot_reply(question: str) -> tuple[str, str, list[str]]:
+    retrieved = RAG_KNOWLEDGE.retrieve(question, top_k=4)
+    references = [chunk.source for chunk in retrieved]
+    context = "\n\n".join([f"Source: {chunk.source}\n{chunk.text}" for chunk in retrieved])
+
     generator = CopilotQuestionGenerator()
-    if generator.token:
+    if generator.token and context:
         try:
-            role_knowledge = build_role_knowledge()
             response = requests.post(
                 generator.endpoint,
                 headers={"Authorization": f"Bearer {generator.token}", "Content-Type": "application/json"},
@@ -306,29 +399,31 @@ def generate_chatbot_reply(question: str) -> tuple[str, str]:
                         {
                             "role": "system",
                             "content": (
-                                "You are the OpenText Role Quest assistant. Answer briefly and clearly. "
-                                "If asked about OpenText Philippines, stay high-level and avoid unverifiable claims. "
-                                "Base role details only on the supplied role context."
+                                "You are an assistant for OpenText Role Quest. "
+                                "Answer using only retrieved context. If context is insufficient, say so briefly. "
+                                "Do not invent detailed facts."
                             ),
                         },
-                        {"role": "system", "content": f"Role context:\n{role_knowledge}"},
+                        {"role": "system", "content": f"Retrieved context:\n{context[:9000]}"},
                         {"role": "user", "content": question[:1200]},
                     ],
-                    "temperature": 0.4,
+                    "temperature": 0.3,
                 },
             )
             response.raise_for_status()
             reply = response.json()["choices"][0]["message"]["content"].strip()
             if reply:
-                return reply, "copilot"
+                return reply, "copilot-rag", references
         except Exception:
             pass
 
-    return local_chatbot_answer(question), "local"
+    return local_chatbot_answer(question, retrieved), "local-rag", references
+
 
 PROFILES, PROFILE_SOURCE = load_profiles()
 validate_profiles(PROFILES)
 PROFILE_LOOKUP = {profile.key: profile for profile in PROFILES}
+RAG_KNOWLEDGE = RAGIndex.from_documents(build_rag_documents(PROFILES, PROFILE_SOURCE))
 
 
 app = Flask(__name__)
@@ -475,19 +570,20 @@ def chatbot_ask():
     if not question:
         return jsonify({"reply": "Please type a question first.", "source": "local"}), 400
 
-    reply, source = generate_chatbot_reply(question)
-    return jsonify({"reply": reply, "source": source})
+    reply, source, references = generate_chatbot_reply(question)
+    return jsonify({"reply": reply, "source": source, "references": references[:3]})
 
 
 @app.post("/admin/reload-profiles")
 def reload_profiles():
-    global PROFILES, PROFILE_LOOKUP, PROFILE_SOURCE
+    global PROFILES, PROFILE_LOOKUP, PROFILE_SOURCE, RAG_KNOWLEDGE
 
     profiles, source = load_profiles()
     validate_profiles(profiles)
     PROFILES = profiles
     PROFILE_SOURCE = source
     PROFILE_LOOKUP = {profile.key: profile for profile in profiles}
+    RAG_KNOWLEDGE = RAGIndex.from_documents(build_rag_documents(PROFILES, PROFILE_SOURCE))
     return redirect(url_for("welcome"))
 
 

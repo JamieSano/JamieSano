@@ -18,6 +18,8 @@ A game-like HR assessment tool that maps candidates to role fit using Likert-sca
 - Sound effects for starting, selecting Likert answers, and moving to next question
 - Persistent leaderboard (`leaderboard.json`) that records top role-match results
 - Floating mascot chatbot with animated “Hi! Talk with me.” prompt for role/OpenText PH Q&A
+- RAG-style chatbot retrieval over uploaded role PDFs for context-grounded answers
+- Voice assistant features: microphone speech-to-text input and text-to-speech bot replies
 
 ## Dynamic question generation from PDFs (Copilot-ready)
 The app supports **PDF role materials** in `job_profiles_pdf/`.

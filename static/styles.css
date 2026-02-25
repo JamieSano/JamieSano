@@ -296,3 +296,36 @@ input[type="text"] {
   color: var(--text);
   padding: 0.55rem;
 }
+
+
+.ref-msg {
+  font-size: 0.78rem;
+  color: #a8c6ff;
+  background: rgba(39, 64, 120, 0.35);
+  border: 1px dashed #5179cc;
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+}
+
+.chatbot-icon-btn {
+  border-radius: 8px;
+  border: 1px solid #50618f;
+  background: #1a2746;
+  color: #e8f4ff;
+  padding: 0 0.65rem;
+  cursor: pointer;
+}
+
+.chatbot-icon-btn.listening {
+  background: #5a2530;
+  border-color: #ff758d;
+}
+
+.voice-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.65rem 0.7rem;
+  color: #c7daf7;
+  font-size: 0.85rem;
+}
