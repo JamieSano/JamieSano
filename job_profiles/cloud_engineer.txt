@@ -1,0 +1,11 @@
+Role: Cloud Engineer
+Description: Cloud Engineers build and maintain cloud infrastructure so systems stay available, scalable, and cost-efficient.
+Fun Fact: OpenText cloud operations support mission-critical workloads that must stay online around the clock.
+LikertStatements:
+- I enjoy working with online infrastructure and services.
+- I like designing systems that can scale to many users.
+- I am interested in automation and deployment pipelines.
+- I like balancing reliability, speed, and cost.
+- I enjoy troubleshooting issues in distributed systems.
+- I am comfortable learning new platforms quickly.
+- I like planning systems with disaster recovery in mind.

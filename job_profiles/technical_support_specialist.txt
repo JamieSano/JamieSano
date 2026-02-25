@@ -1,0 +1,11 @@
+Role: Technical Support Specialist
+Description: Technical Support Specialists help users solve product issues and ensure customers succeed with technology.
+Fun Fact: OpenText support professionals build long-term trust by helping customers recover quickly from technical challenges.
+LikertStatements:
+- I enjoy helping people solve technical problems.
+- I communicate clearly even when issues are complex.
+- I stay patient and friendly under pressure.
+- I like reproducing issues to find root causes.
+- I enjoy guiding users through step-by-step solutions.
+- I can balance empathy with efficient troubleshooting.
+- I like documenting solutions for future use.

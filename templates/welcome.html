@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card hero">
+  <p class="badge">🎮 Game-like Talent Assessment</p>
+  <h1>Welcome to OpenText Role Quest</h1>
+  <p>
+    Discover which role fits your strengths best through 35 quick Likert-style questions
+    (1 = Strongly Disagree, 5 = Strongly Agree).
+  </p>
+  <a class="btn" href="{{ url_for('start') }}">Start Your Quest</a>
+</section>
+{% endblock %}

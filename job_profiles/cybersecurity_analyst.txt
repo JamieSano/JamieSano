@@ -1,0 +1,11 @@
+Role: Cybersecurity Analyst
+Description: Cybersecurity Analysts protect systems, detect threats, and help organizations respond to security incidents.
+Fun Fact: OpenText security solutions help monitor and protect sensitive enterprise information across global networks.
+LikertStatements:
+- I am interested in identifying risks before problems happen.
+- I enjoy investigating unusual system behavior.
+- I like learning how attacks happen and how to prevent them.
+- I stay calm while handling urgent incidents.
+- I care deeply about privacy and data protection.
+- I enjoy following security standards and best practices.
+- I like documenting findings clearly for others.

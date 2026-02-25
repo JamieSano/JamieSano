@@ -1,0 +1,147 @@
+:root {
+  --bg: #101727;
+  --card: #1a2338;
+  --accent: #7c5cff;
+  --accent-2: #32d8ff;
+  --text: #f6f8ff;
+  --muted: #b4bfd6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #1d2950, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  width: min(760px, 94%);
+  margin: 2rem auto;
+}
+
+.card {
+  background: linear-gradient(160deg, #1e2945, var(--card));
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(124, 92, 255, 0.2);
+  color: #d9ceff;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  gap: 0.5rem;
+}
+
+input[type="text"] {
+  border-radius: 10px;
+  border: 1px solid #415077;
+  background: #0f1730;
+  color: var(--text);
+  padding: 0.65rem;
+}
+
+.error {
+  color: #ff9fba;
+  font-weight: 700;
+}
+
+.progress-wrap {
+  height: 10px;
+  border-radius: 999px;
+  background: #0f1730;
+  margin: 1rem 0;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.likert-form {
+  margin-top: 1rem;
+}
+
+.likert-scale {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.likert-scale label {
+  background: #0f1730;
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.6rem;
+  border: 1px solid #344063;
+}
+
+.likert-scale input {
+  margin-bottom: 0.25rem;
+}
+
+.scale-caption {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.fun-fact {
+  color: #ffe7ac;
+}
+
+.score-list {
+  list-style: none;
+  padding: 0;
+}
+
+.score-list li {
+  display: flex;
+  justify-content: space-between;
+  background: #0f1730;
+  border: 1px solid #344063;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.45rem;
+}

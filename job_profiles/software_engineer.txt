@@ -1,0 +1,11 @@
+Role: Software Engineer
+Description: Software Engineers design, build, and improve applications that are scalable, secure, and user-friendly.
+Fun Fact: OpenText engineering teams maintain products that serve thousands of enterprise customers worldwide.
+LikertStatements:
+- I enjoy building applications from ideas.
+- I like solving technical problems step by step.
+- I am excited by learning new programming tools.
+- I enjoy improving code so it runs faster and cleaner.
+- I can work through debugging without giving up.
+- I like collaborating with teammates using version control.
+- I care about writing secure and reliable software.

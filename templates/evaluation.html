@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card hero">
+  <p class="badge">🏆 Final Result</p>
+  <h1>WOW! {{ name }}, you are fit to be a {{ role.role }}.</h1>
+  <p><strong>Course:</strong> {{ course }}</p>
+  <p>{{ role.description }}</p>
+
+  <h3>Fun fact about this OpenText role</h3>
+  <p class="fun-fact">{{ role.fun_fact }}</p>
+
+  <h3>Role compatibility scores</h3>
+  <ul class="score-list">
+    {% for score in scores %}
+      <li><span>{{ score.role }}</span><strong>{{ score.score }}</strong></li>
+    {% endfor %}
+  </ul>
+
+  <a class="btn" href="{{ url_for('welcome') }}">Play Again</a>
+</section>
+{% endblock %}
