@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="OpenText style mascot">
+  <defs>
+    <linearGradient id="fur" x1="0" x2="1">
+      <stop offset="0" stop-color="#f7fbff"/>
+      <stop offset="1" stop-color="#dfe9f4"/>
+    </linearGradient>
+  </defs>
+  <circle cx="90" cy="90" r="84" fill="#152544"/>
+  <circle cx="90" cy="90" r="62" fill="url(#fur)" stroke="#c6d3e3" stroke-width="3"/>
+  <circle cx="66" cy="82" r="12" fill="#fff"/><circle cx="114" cy="82" r="12" fill="#fff"/>
+  <circle cx="66" cy="82" r="6" fill="#2f8dff"/><circle cx="114" cy="82" r="6" fill="#2f8dff"/>
+  <ellipse cx="90" cy="103" rx="14" ry="10" fill="#f0d8c0"/>
+  <path d="M72 122 q18 18 36 0" stroke="#2d2d2d" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M36 118 q20 -6 30 9" stroke="#58b5ff" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M144 118 q-20 -6 -30 9" stroke="#58b5ff" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M48 138 q42 22 84 0" stroke="#2b7fe0" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg>

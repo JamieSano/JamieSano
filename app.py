@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from pypdf import PdfReader
 
 
@@ -251,6 +251,81 @@ def format_leaderboard_entries(entries: list[dict[str, str | int]], limit: int =
     return formatted
 
 
+
+
+def build_role_knowledge() -> str:
+    lines: list[str] = []
+    for profile in PROFILES:
+        lines.append(f"Role: {profile.role}")
+        lines.append(f"Description: {profile.description}")
+        lines.append(f"Fun Fact: {profile.fun_fact}")
+        lines.append("-")
+    return "\n".join(lines)
+
+
+def local_chatbot_answer(question: str) -> str:
+    q = question.lower()
+
+    for profile in PROFILES:
+        role_name = profile.role.lower()
+        if role_name in q or profile.key.replace('_', ' ') in q:
+            return (
+                f"Great question! For {profile.role}, here is a quick overview: "
+                f"{profile.description} Fun fact: {profile.fun_fact}"
+            )
+
+    if "opentext" in q and ("philippines" in q or "ph" in q):
+        return (
+            "OpenText in the Philippines is part of OpenText's global organization and supports enterprise "
+            "customers through technology, operations, and talent development. For official office and hiring "
+            "details, please check OpenText's official careers and company pages."
+        )
+
+    if "role" in q or "fit" in q or "job" in q:
+        role_names = ", ".join([profile.role for profile in PROFILES])
+        return f"The assessment currently maps candidates to these roles: {role_names}."
+
+    return (
+        "I can help with role descriptions, role-fit tips, and general OpenText Philippines questions. "
+        "Try asking: 'What does a Cloud Engineer do?' or 'Tell me about OpenText Philippines.'"
+    )
+
+
+def generate_chatbot_reply(question: str) -> tuple[str, str]:
+    generator = CopilotQuestionGenerator()
+    if generator.token:
+        try:
+            role_knowledge = build_role_knowledge()
+            response = requests.post(
+                generator.endpoint,
+                headers={"Authorization": f"Bearer {generator.token}", "Content-Type": "application/json"},
+                timeout=20,
+                json={
+                    "model": generator.model,
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": (
+                                "You are the OpenText Role Quest assistant. Answer briefly and clearly. "
+                                "If asked about OpenText Philippines, stay high-level and avoid unverifiable claims. "
+                                "Base role details only on the supplied role context."
+                            ),
+                        },
+                        {"role": "system", "content": f"Role context:\n{role_knowledge}"},
+                        {"role": "user", "content": question[:1200]},
+                    ],
+                    "temperature": 0.4,
+                },
+            )
+            response.raise_for_status()
+            reply = response.json()["choices"][0]["message"]["content"].strip()
+            if reply:
+                return reply, "copilot"
+        except Exception:
+            pass
+
+    return local_chatbot_answer(question), "local"
+
 PROFILES, PROFILE_SOURCE = load_profiles()
 validate_profiles(PROFILES)
 PROFILE_LOOKUP = {profile.key: profile for profile in PROFILES}
@@ -391,6 +466,17 @@ def evaluate():
         best_score_max=max_possible,
         best_percent=round((best_role_score / max_possible) * 100),
     )
+
+
+@app.post("/chatbot/ask")
+def chatbot_ask():
+    payload = request.get_json(silent=True) or {}
+    question = str(payload.get("question", "")).strip()
+    if not question:
+        return jsonify({"reply": "Please type a question first.", "source": "local"}), 400
+
+    reply, source = generate_chatbot_reply(question)
+    return jsonify({"reply": reply, "source": source})
 
 
 @app.post("/admin/reload-profiles")

@@ -10,6 +10,28 @@
     <main class="container">
       {% block content %}{% endblock %}
     </main>
+
+    <section class="chatbot-shell" id="chatbotShell">
+      <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chatbot">
+        <img src="{{ url_for('static', filename='mascot.svg') }}" alt="Mascot chatbot" />
+        <span class="chatbot-wave">Hi! Talk with me.</span>
+      </button>
+      <div class="chatbot-panel" id="chatbotPanel" hidden>
+        <div class="chatbot-header">
+          <strong>OpenText Buddy</strong>
+          <small>Ask about roles & OpenText Philippines</small>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="bot-msg">Hi! I'm your role guide. Ask me anything about the roles.</div>
+        </div>
+        <form id="chatbotForm" class="chatbot-form">
+          <input id="chatbotInput" type="text" placeholder="Type your question..." maxlength="300" required />
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
     <script src="{{ url_for('static', filename='game.js') }}"></script>
+    <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
   </body>
 </html>
